@@ -1,5 +1,8 @@
 import os
 
+CSRF_ENABLED = True
+SECRET_KEY = 'you-can-guess'
+
 # MySQL configuration
 basedir = os.path.abspath(os.path.dirname(__file__))
 

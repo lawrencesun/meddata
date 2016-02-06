@@ -1,5 +1,5 @@
 from myapp import db
-
+from myapp import app
 # User
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -20,4 +20,4 @@ class Data(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 	def __repr__(self):
-        return '<Data %r>' % self.cardiac_rate
+        return '<Data %r>' % (self.systolic_pressure, self.diastolic_pressure, self.cardiac_rate, self.timestamp)

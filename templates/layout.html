@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    {% if title %}
+    <title>{{title}} - Meddata</title>
+    {% else %}
+    <title>Meddata</title>
+    {% endif %}
+  </head>
+  <body>
+    <h1>Meddata Home</h1>>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+      {% block body %}{% endblock %}
+  </body>
+</html>
