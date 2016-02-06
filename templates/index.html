@@ -1,4 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1>Hi, {{user.username}}!</h1>
+  <h1>Hi, 
+  {% if g.user.is_authenticated() %}
+    {{ g.user.username }}
+  {% else %} 
+    Stranger 
+  {% endif %}
+  </h1>
 {% endblock %}

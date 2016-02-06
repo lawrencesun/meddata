@@ -7,6 +7,18 @@ class User(db.Model):
     email = db.Column(db.String(120), index = True, unique = True)
     datas = db.relationship('Data', backref='user', lazy='dynamic')
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
     def __repr__(self):
         return '<User %r>' % (self.username)
 
@@ -18,6 +30,3 @@ class Data(db.Model):
 	cardiac_rate = db.Column(db.Integer, default = 0)
 	timestamp = db.Column(db.DateTime)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-	def __repr__(self):
-        return '<Data %r>' % (self.systolic_pressure, self.diastolic_pressure, self.cardiac_rate, self.timestamp)
