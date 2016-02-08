@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request, flash, session, g, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from myapp import app, db, lm
-from forms import LoginForm
+from forms import LoginForm, RegistrationForm
 from models import User
 
 @lm.user_loader
@@ -39,3 +39,16 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('index'))
+
+@app.route('/register', methods = ['GET', 'POST'])
+def register():
+	form = RegistrationForm()
+	if form.validate_on_submit():
+		user = User(username = form.username.data, 
+					email = form.email.data)
+		db.session.add(user)
+		db.session.commit()
+		flash("You can now login.")
+		return redirect(url_for('login'))
+	return render_template('register.html', 
+		form = form)

@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 {% block body %}
   <h2>Login</h2>
-  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
   <form action="" method="post" name="login">
     {{form.hidden_tag()}}
     <p>
-        Please enter your Email:<br>
-        {{form.email}}<br>
+      Please enter your Email:<br>
+      {{form.email}}<br>
     </p>
     <p>{{form.remember_me}} Remember Me</p>
+
+    <p>
+      New user?
+      <a href="{{ url_for('register') }}">
+      Click here to register
+      </a>
+    </p>
+
     <p><input type="submit" value="Sign In"></p>
   </form>
 {% endblock %}
