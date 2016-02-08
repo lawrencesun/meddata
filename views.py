@@ -1,8 +1,10 @@
 from flask import Flask, render_template, url_for, redirect, request, flash, session, g, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from myapp import app, db, lm
-from forms import LoginForm, RegistrationForm
-from models import User
+from forms import LoginForm, RegistrationForm, DataForm
+from models import User, Data
+import datetime
+from sqlalchemy import func
 
 @lm.user_loader
 def load_user(id):
@@ -13,12 +15,53 @@ def before_request():
     g.user = current_user
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods = ['GET', 'POST'])
+@login_required
 def index():
-	user = g.user
+	form = DataForm()
+	user_data = Data.query.filter_by(user_id = g.user.id)
+	#ms = user_data.order_by(Data.systolic_pressure.desc()).first()
+	four_weeks_ago = datetime.datetime.now() - datetime.timedelta(weeks=4)
+
+	maxs = db.session.query(func.max(Data.systolic_pressure).label('max_systolic')).filter_by(user_id = g.user.id).one()
+	max_systolic = maxs.max_systolic
+	mins = db.session.query(func.min(Data.systolic_pressure).label('min_systolic')).filter_by(user_id = g.user.id).one()
+	min_systolic = mins.min_systolic
+	avgs = db.session.query(func.avg(Data.systolic_pressure).label('avg_systolic')).filter_by(user_id = g.user.id).\
+			filter(Data.timestamp > four_weeks_ago).one()
+	avg_systolic = avgs.avg_systolic
+
+	maxd = db.session.query(func.max(Data.diastolic_pressure).label('max_diastolic')).filter_by(user_id = g.user.id).one()
+	max_diastolic = maxd.max_diastolic
+	mind = db.session.query(func.min(Data.diastolic_pressure).label('min_diastolic')).filter_by(user_id = g.user.id).one()
+	min_diastolic = mind.min_diastolic
+	avgd = db.session.query(func.avg(Data.diastolic_pressure).label('avg_diastolic')).filter_by(user_id = g.user.id).\
+			filter(Data.timestamp > four_weeks_ago).one()
+	avg_diastolic = avgd.avg_diastolic
+
+	if form.validate_on_submit():
+		data = Data(systolic_pressure = form.systolic_pressure.data,
+					diastolic_pressure = form.diastolic_pressure.data,
+					cardiac_rate = form.cardiac_rate.data,
+					timestamp = datetime.now(),
+					user = g.user)
+		db.session.add(data)
+		db.session.commit()
+		flash('Added successfully')
+		return redirect(url_for('index'))
+
+	datas = user_data.order_by(Data.timestamp.desc()).limit(10)
+
 	return render_template('index.html',
 		title = 'Home',
-		user = user)
+		form = form,
+		max_systolic = max_systolic,
+		min_systolic = min_systolic,
+		avg_systolic = avg_systolic,
+		max_diastolic = max_diastolic,
+		min_diastolic = min_diastolic,
+		avg_diastolic = avg_diastolic,
+		datas = datas)
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():

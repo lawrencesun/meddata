@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, ValidationError
-from wtforms.validators import Required, Email, Length, Regexp
+from wtforms import StringField, BooleanField, IntegerField, ValidationError
+from wtforms.validators import Required, Email, Length, Regexp, NumberRange
 from models import User
 
 class LoginForm(Form):
@@ -18,3 +18,8 @@ class RegistrationForm(Form):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use')
+
+class DataForm(Form):
+	systolic_pressure = IntegerField('Systolic',validators=[Required(), NumberRange(min=20, max=200)])
+	diastolic_pressure = IntegerField('Diastolic', validators=[Required(), NumberRange(min=20, max=200)])
+	cardiac_rate = IntegerField('Cardiac', validators=[Required(), NumberRange(min=20, max=200)])

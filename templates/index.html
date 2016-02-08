@@ -7,4 +7,43 @@
     Stranger 
   {% endif %}
   </h1>
+
+  <div>
+    {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
+    <form action="" method="post" name="data">
+      {{form.hidden_tag()}}
+      <p>
+        Systolic pressure:<br>
+        {{form.systolic_pressure}}<br>
+      </p>
+      <p>
+        diastolic pressure:<br>
+        {{form.diastolic_pressure}}<br>
+      </p>
+      <p>
+        cardiac rate:<br>
+        {{form.cardiac_rate}}<br>
+      </p>
+
+      <p><input type="submit" value="Submit"></p>
+    </form>
+  </div>
+
+  <h4>Max Systolic_Pressure: {{max_systolic}}<br></h4>
+  <h4>Min Systolic_Pressure: {{min_systolic}}<br></h4>
+  <h4>Avg Systolic_Pressure(Within 4 weeks): {{avg_systolic}}<br></h4>
+  <h4>Max Diastolic_Pressure: {{max_diastolic}}<br></h4>
+  <h4>Min Diastolic_Pressure: {{min_diastolic}}<br></h4>
+  <h4>Avg Diastolic_Pressure(Within 4 weeks): {{avg_diastolic}}<br></h4>
+  <div>
+  {% for data in datas %}
+    {{data.timestamp}}<br>
+    {{data.systolic_pressure}}<br>
+    {{data.diastolic_pressure}}<br>
+    {{data.cardiac_rate}}<br>
+  {% endfor %}
+  </div>
+
+
 {% endblock %}
+
