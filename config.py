@@ -26,6 +26,7 @@ SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
                           % (MYSQL_USER, MYSQL_PASS,
                              MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+SQLALCHEMY_POOL_RECYCLE = 10
 
 # pagination
 DATAS_PER_PAGE = 3
