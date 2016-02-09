@@ -39,6 +39,14 @@ def index():
 			filter(Data.timestamp > four_weeks_ago).one()
 	avg_diastolic = avgd.avg_diastolic
 
+	maxc = db.session.query(func.max(Data.cardiac_rate).label('max_rate')).filter_by(user_id = g.user.id).one()
+	max_rate = maxc.max_rate
+	minc = db.session.query(func.min(Data.cardiac_rate).label('min_rate')).filter_by(user_id = g.user.id).one()
+	min_rate = minc.min_rate
+	avgc = db.session.query(func.avg(Data.cardiac_rate).label('avg_rate')).filter_by(user_id = g.user.id).\
+			filter(Data.timestamp > four_weeks_ago).one()
+	avg_rate = avgc.avg_rate
+
 	if form.validate_on_submit():
 		data = Data(systolic_pressure = form.systolic_pressure.data,
 					diastolic_pressure = form.diastolic_pressure.data,
@@ -62,6 +70,9 @@ def index():
 		max_diastolic = max_diastolic,
 		min_diastolic = min_diastolic,
 		avg_diastolic = avg_diastolic,
+		max_rate = max_rate,
+		min_rate = min_rate,
+		avg_rate = avg_rate,
 		datas = datas)
 
 @app.route('/login', methods = ['GET', 'POST'])
