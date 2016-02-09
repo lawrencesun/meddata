@@ -44,15 +44,17 @@
   <h4>Avg Cardiac_Rate(Within 4 weeks): {{avg_rate}}<br></h4>
   <h4>History Data:</h4><br>
   <div>
-  {% for data in datas %}
-    {{data.timestamp}}<br>
-    {{data.systolic_pressure}}<br>
-    {{data.diastolic_pressure}}<br>
-    {{data.cardiac_rate}}<br>
-    {% if data.body%}
-      {{data.body}}<br>
-    {% endif %}
-  {% endfor %}
+    {% for data in datas.items %}
+      {{data.timestamp}}<br>
+      {{data.systolic_pressure}}<br>
+      {{data.diastolic_pressure}}<br>
+      {{data.cardiac_rate}}<br>
+      {% if data.body%}
+        {{data.body}}<br>
+      {% endif %}
+    {% endfor %}
+    {% if datas.has_prev %}<a href="{{ url_for('index', page = datas.prev_num) }}"><< Newer</a>{% else %}<< Newer{% endif %} |
+    {% if datas.has_next %}<a href="{{ url_for('index', page = datas.next_num) }}">Older>></a>{% else %}Older>>{% endif %}
   </div>
 
 

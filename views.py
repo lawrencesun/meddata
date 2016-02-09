@@ -5,6 +5,7 @@ from forms import LoginForm, RegistrationForm, DataForm
 from models import User, Data
 import datetime
 from sqlalchemy import func
+from config import DATAS_PER_PAGE
 
 @lm.user_loader
 def load_user(id):
@@ -16,8 +17,9 @@ def before_request():
 
 @app.route('/')
 @app.route('/index', methods = ['GET', 'POST'])
+@app.route('/index/<int:page>', methods = ['GET', 'POST'])
 @login_required
-def index():
+def index(page = 1):
 	form = DataForm()
 	user_data = Data.query.filter_by(user_id = g.user.id)
 	#ms = user_data.order_by(Data.systolic_pressure.desc()).first()
@@ -59,7 +61,7 @@ def index():
 		flash('Added successfully')
 		return redirect(url_for('index'))
 
-	datas = user_data.order_by(Data.timestamp.desc()).limit(10)
+	datas = user_data.order_by(Data.timestamp.desc()).paginate(page, DATAS_PER_PAGE, False)
 
 	return render_template('index.html',
 		title = 'Home',
