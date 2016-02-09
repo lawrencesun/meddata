@@ -19,7 +19,7 @@ try:
         MYSQL_HOST = sae.const.MYSQL_HOST
         MYSQL_PORT = sae.const.MYSQL_PORT
 except ImportError:
-	pass
+    pass
 
 
 SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
