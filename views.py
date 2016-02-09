@@ -58,6 +58,7 @@ def index(page = 1):
 					user = g.user)
 		db.session.add(data)
 		db.session.commit()
+		db.session.close()
 		flash('Added successfully')
 		return redirect(url_for('index'))
 
@@ -90,6 +91,7 @@ def entry():
 					user = g.user)
 		db.session.add(data)
 		db.session.commit()
+		db.session.close()
 		flash('Added successfully')
 		return redirect(url_for('index'))
 	return render_template('entry.html',
@@ -125,6 +127,7 @@ def register():
 					email = form.email.data)
 		db.session.add(user)
 		db.session.commit()
+		db.session.close()
 		flash("You can now login.")
 		return redirect(url_for('login'))
 	return render_template('register.html', 
