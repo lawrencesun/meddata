@@ -1,2 +1,24 @@
 name: meddata
 version: 1
+
+libraries:
+- name: flask
+  version: "0.10.1"
+
+- name: flask-sqlalchemy
+  version: "1.0"
+
+- name: sqlalchemy
+  version: "0.7.9"
+
+- name: jinja2
+  version: "2.8"
+
+- name: wtforms
+  version: "2.1"
+
+- name: flask-login
+  version: "0.2.11"
+
+- name: flask-wtf
+  version: "0.9.0"
