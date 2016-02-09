@@ -43,7 +43,8 @@ def index():
 		data = Data(systolic_pressure = form.systolic_pressure.data,
 					diastolic_pressure = form.diastolic_pressure.data,
 					cardiac_rate = form.cardiac_rate.data,
-					timestamp = datetime.now(),
+					timestamp = datetime.datetime.now(),
+					body = form.note.data,
 					user = g.user)
 		db.session.add(data)
 		db.session.commit()

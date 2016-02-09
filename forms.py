@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, IntegerField, ValidationError
+from wtforms import StringField, BooleanField, IntegerField, TextField, ValidationError
 from wtforms.validators import Required, Email, Length, Regexp, NumberRange
 from models import User
 
@@ -20,6 +20,7 @@ class RegistrationForm(Form):
             raise ValidationError('Username already in use')
 
 class DataForm(Form):
-	systolic_pressure = IntegerField('Systolic',validators=[Required(), NumberRange(min=20, max=200)])
-	diastolic_pressure = IntegerField('Diastolic', validators=[Required(), NumberRange(min=20, max=200)])
-	cardiac_rate = IntegerField('Cardiac', validators=[Required(), NumberRange(min=20, max=200)])
+    systolic_pressure = IntegerField('Systolic',validators=[Required(), NumberRange(min=20, max=200)])
+    diastolic_pressure = IntegerField('Diastolic', validators=[Required(), NumberRange(min=20, max=200)])
+    cardiac_rate = IntegerField('Cardiac', validators=[Required(), NumberRange(min=20, max=200)])
+    note = TextField('Note')

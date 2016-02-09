@@ -24,6 +24,10 @@
         cardiac rate:<br>
         {{form.cardiac_rate}}<br>
       </p>
+      <p>
+        note:<br>
+        {{form.note}}<br>
+      </p>
 
       <p><input type="submit" value="Submit"></p>
     </form>
@@ -41,6 +45,9 @@
     {{data.systolic_pressure}}<br>
     {{data.diastolic_pressure}}<br>
     {{data.cardiac_rate}}<br>
+    {% if data.body%}
+      {{data.body}}<br>
+    {% endif %}
   {% endfor %}
   </div>
 
