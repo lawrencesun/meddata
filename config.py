@@ -13,11 +13,11 @@ MYSQL_PASS = '123456'
 MYSQL_DB = 'app'
 try:
     import sae.const
-        MYSQL_DB = sae.const.MYSQL_DB
-        MYSQL_USER = sae.const.MYSQL_USER
-        MYSQL_PASS = sae.const.MYSQL_PASS
-        MYSQL_HOST = sae.const.MYSQL_HOST
-        MYSQL_PORT = sae.const.MYSQL_PORT
+    MYSQL_DB = sae.const.MYSQL_DB
+    MYSQL_USER = sae.const.MYSQL_USER
+    MYSQL_PASS = sae.const.MYSQL_PASS
+    MYSQL_HOST = sae.const.MYSQL_HOST
+    MYSQL_PORT = sae.const.MYSQL_PORT
 except ImportError:
     pass
 
