@@ -77,6 +77,26 @@ def index(page = 1):
 		avg_rate = avg_rate,
 		datas = datas)
 
+@app.route('/entry', methods = ['GET', 'POST'])
+@login_required
+def entry():
+	form = DataForm()
+	if form.validate_on_submit():
+		data = Data(systolic_pressure = form.systolic_pressure.data,
+					diastolic_pressure = form.diastolic_pressure.data,
+					cardiac_rate = form.cardiac_rate.data,
+					timestamp = datetime.datetime.now(),
+					body = form.note.data,
+					user = g.user)
+		db.session.add(data)
+		db.session.commit()
+		flash('Added successfully')
+		return redirect(url_for('index'))
+	return render_template('entry.html',
+		title = 'Entry',
+		form = form)
+
+
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	form = LoginForm()

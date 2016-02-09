@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3" style="text-align: center">
+    {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
+    <form action="" method="post" name="data">
+      {{form.hidden_tag()}}
+      <div class="form-group">
+        <label for="systolic">Systolic Pressure</label><br>
+        {{form.systolic_pressure}}
+      </div>
+      <div class="form-group">
+        <label for="diastolic">Diastolic Pressure</label><br>
+        {{form.diastolic_pressure}}
+      </div>
+      <div class="form-group">
+        <label for="cardiac">Cardiac Rate</label><br>
+        {{form.cardiac_rate}}
+      </div>
+      <div class="form-group">
+        <label for="note">Note</label><br>
+        {{form.note}}
+      </div>
+      
+      <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,22 +1,30 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Login</h2>
-  {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
-  <form action="" method="post" name="login">
-    {{form.hidden_tag()}}
-    <p>
-      Please enter your Email:<br>
-      {{form.email}}<br>
-    </p>
-    <p>{{form.remember_me}} Remember Me</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3" style="text-align: center">
+    <h3>Log in</h3>
+    {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
+    <form action="" method="post" name="login">
+      {{form.hidden_tag()}}
+      <div class="form-group">
+        <label for="email">Please enter your Email</label><br>
+        {{form.email}}
+      </div>
 
-    <p>
-      New user?
-      <a href="{{ url_for('register') }}">
-      Click here to register
-      </a>
-    </p>
+      <p>{{form.remember_me}} Remember Me</p>
 
-    <p><input type="submit" value="Sign In"></p>
-  </form>
+      <button type="submit" value="Signin" class="btn btn-primary">Sign In</button>
+      <br>
+      <br>
+      <p>
+        New user?
+        <a href="{{ url_for('register') }}">
+        Click here to register
+        </a>
+      </p>
+      <p>* Test Account: test@abc.com</p>
+
+    </form>
+  </div>
+</div>
 {% endblock %}

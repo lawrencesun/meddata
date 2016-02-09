@@ -1,62 +1,92 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1>Hi, 
-  {% if g.user.is_authenticated() %}
-    {{ g.user.username }}
-  {% else %} 
-    Stranger 
-  {% endif %}
-  </h1>
-
-  <div>
-    {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
-    <form action="" method="post" name="data">
-      {{form.hidden_tag()}}
-      <p>
-        systolic pressure:<br>
-        {{form.systolic_pressure}}<br>
-      </p>
-      <p>
-        diastolic pressure:<br>
-        {{form.diastolic_pressure}}<br>
-      </p>
-      <p>
-        cardiac rate:<br>
-        {{form.cardiac_rate}}<br>
-      </p>
-      <p>
-        note:<br>
-        {{form.note}}<br>
-      </p>
-
-      <p><input type="submit" value="Submit"></p>
-    </form>
-  </div>
-
-  <h4>Max Systolic_Pressure: {{max_systolic}}<br></h4>
-  <h4>Min Systolic_Pressure: {{min_systolic}}<br></h4>
-  <h4>Avg Systolic_Pressure(Within 4 weeks): {{avg_systolic}}<br></h4>
-  <h4>Max Diastolic_Pressure: {{max_diastolic}}<br></h4>
-  <h4>Min Diastolic_Pressure: {{min_diastolic}}<br></h4>
-  <h4>Avg Diastolic_Pressure(Within 4 weeks): {{avg_diastolic}}<br></h4>
-  <h4>Max Cardiac_Rate: {{max_rate}}<br></h4>
-  <h4>Min Cardiac_Rate: {{min_rate}}<br></h4>
-  <h4>Avg Cardiac_Rate(Within 4 weeks): {{avg_rate}}<br></h4>
-  <h4>History Data:</h4><br>
-  <div>
-    {% for data in datas.items %}
-      {{data.timestamp}}<br>
-      {{data.systolic_pressure}}<br>
-      {{data.diastolic_pressure}}<br>
-      {{data.cardiac_rate}}<br>
-      {% if data.body%}
-        {{data.body}}<br>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3" style="text-align: center">
+      <h1>Hi, 
+      {% if g.user.is_authenticated() %}
+        {{ g.user.username }}
+      {% else %} 
+        Stranger 
       {% endif %}
-    {% endfor %}
-    {% if datas.has_prev %}<a href="{{ url_for('index', page = datas.prev_num) }}"><< Newer</a>{% else %}<< Newer{% endif %} |
-    {% if datas.has_next %}<a href="{{ url_for('index', page = datas.next_num) }}">Older>></a>{% else %}Older>>{% endif %}
-  </div>
+      </h1>
+      <a class="btn btn-success" href="{{ url_for('entry') }}" role="button">Entry</a>
+      
+    </div>
+  </div> <!-- row of form-->
+  <hr>
+  
+  <!-- Data Summary-->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h3>Data Summary</h3>
+      <p>* Average Data within 4 weeks</p>
+      <table class="table table-bordered">
+        <thead>
+          <th></th>
+          <th>Systolic Pressure</th>
+          <th>Diastolic Pressure</th>
+          <th>Cardiac Rate</th>
+        </thead>
 
+        <tbody>
+          <tr>
+            <th scope="row">Max</th>
+            <td>{{max_systolic}}</td>
+            <td>{{max_diastolic}}</td>
+            <td>{{max_rate}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Min</th>
+            <td>{{min_systolic}}</td>
+            <td>{{min_diastolic}}</td>
+            <td>{{min_rate}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Avg</th>
+            <td>{{avg_systolic}}</td>
+            <td>{{avg_diastolic}}</td>
+            <td>{{avg_rate}}</td>
+          </tr>
+        </tbody>
+      </table>    
+    </div>
+  </div>
+  <hr>
+
+  <!-- History Data -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h3>History Data</h3>
+      <table class="table table-hover">
+        <thead>
+          <th>Time</th>
+          <th>Systolic Pressure</th>
+          <th>Diastolic Pressure</th>
+          <th>Cardiac Rate</th>
+          <th>Note</th>
+        </thead>
+
+        {% for data in datas.items %}
+        <tbody>
+          <tr>
+            <td>{{data.timestamp}}</td>
+            <td>{{data.systolic_pressure}}</td>
+            <td>{{data.diastolic_pressure}}</td>
+            <td>{{data.cardiac_rate}}</td>
+            <td>{% if data.body%}{{data.body}}{% endif %}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+      
+      <nav>
+        <ul class="pager">
+          <li>{% if datas.has_prev %}<a href="{{ url_for('index', page = datas.prev_num) }}"><< Newer</a>{% else %}<< Newer{% endif %}</li>
+          <li>{% if datas.has_next %}<a href="{{ url_for('index', page = datas.next_num) }}">Older >></a>{% else %}Older >>{% endif %}</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 
 {% endblock %}
 
