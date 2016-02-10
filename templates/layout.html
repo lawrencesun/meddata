@@ -30,9 +30,9 @@
         </div> 
         <div class="collapse navbar-collapse" id="sign">
           {% if g.user.is_authenticated() %} 
-            <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-default navbar-btn pull-right"><!-- Sign out -->登录</button></a>
+            <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-default navbar-btn pull-right"><!-- Sign out -->退出</button></a>
           {% else %}
-            <a href="{{ url_for('login') }}"><button type="button" class="btn btn-default navbar-btn pull-right"><!-- Sign in -->退出</button></a>
+            <a href="{{ url_for('login') }}"><button type="button" class="btn btn-default navbar-btn pull-right"><!-- Sign in -->登录</button></a>
           {% endif %}
         </div> 
       </div> 

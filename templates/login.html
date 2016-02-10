@@ -2,7 +2,7 @@
 {% block body %}
 <div class="row">
   <div class="col-md-6 col-md-offset-3" style="text-align: center">
-    <h3>Log in</h3>
+    <h3><!-- Log in -->登录</h3>
     {% if form.errors %}<p class=><strong>Error:</strong> {{ form.errors }}{% endif %}
     <form action="" method="post" name="login">
       {{form.hidden_tag()}}
