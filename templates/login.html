@@ -7,19 +7,24 @@
     <form action="" method="post" name="login">
       {{form.hidden_tag()}}
       <div class="form-group">
-        <label for="email">Please enter your Email</label><br>
+        <!-- <label for="email">Please enter your Email</label><br> -->
+        <label for="email">邮箱</label><br>
         {{form.email}}
       </div>
 
-      <p>{{form.remember_me}} Remember Me</p>
+      <!-- <p>{{form.remember_me}} Remember Me</p> -->
+      <p>{{form.remember_me}}下次自动登录</p>
 
-      <button type="submit" value="Signin" class="btn btn-primary">Sign In</button>
+      <!-- <button type="submit" value="Signin" class="btn btn-primary">Sign In</button> -->
+      <button type="submit" value="Signin" class="btn btn-primary">登录</button>
       <br>
       <br>
       <p>
-        New user?
+        <!-- New user? -->
+        新用户?
         <a href="{{ url_for('register') }}">
-        Click here to register
+        <!-- Click here to register -->
+        点击这里注册
         </a>
       </p>
       <p>* Test Account: test@abc.com</p>

@@ -9,7 +9,7 @@
         Stranger 
       {% endif %}
       </h1>
-      <a class="btn btn-success" href="{{ url_for('entry') }}" role="button">Entry</a>
+      <a class="btn btn-success" href="{{ url_for('entry') }}" role="button"><!--Entry-->记录</a>
       
     </div>
   </div> <!-- row of form-->
@@ -18,31 +18,33 @@
   <!-- Data Summary-->
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      <h3>Data Summary</h3>
-      <p>* Average Data within 4 weeks</p>
+      <!-- <h3>Data Summary</h3>
+      <p>* Average Data within 4 weeks</p> -->
+      <h3>数据分析</h3>
+      <p>* 平均值为最近4周</p>
       <table class="table table-bordered">
         <thead>
           <th></th>
-          <th>Systolic Pressure</th>
-          <th>Diastolic Pressure</th>
-          <th>Cardiac Rate</th>
+          <th><!-- Systolic Pressure -->收缩压</th>
+          <th><!-- Diastolic Pressure-->舒张压</th>
+          <th><!-- Cardiac Rate -->心率</th>
         </thead>
 
         <tbody>
           <tr>
-            <th scope="row">Max</th>
+            <th scope="row"><!-- Max -->最高</th>
             <td>{{max_systolic}}</td>
             <td>{{max_diastolic}}</td>
             <td>{{max_rate}}</td>
           </tr>
           <tr>
-            <th scope="row">Min</th>
+            <th scope="row"><!-- Min -->最低</th>
             <td>{{min_systolic}}</td>
             <td>{{min_diastolic}}</td>
             <td>{{min_rate}}</td>
           </tr>
           <tr>
-            <th scope="row">Avg</th>
+            <th scope="row"><!-- Avg -->平均</th>
             <td>{{avg_systolic}}</td>
             <td>{{avg_diastolic}}</td>
             <td>{{avg_rate}}</td>
@@ -56,14 +58,15 @@
   <!-- History Data -->
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      <h3>History Data</h3>
+      <!-- <h3>Historical Data</h3> -->
+      <h3>历史数据</h3>
       <table class="table table-hover">
         <thead>
-          <th>Time</th>
-          <th>Systolic Pressure</th>
-          <th>Diastolic Pressure</th>
-          <th>Cardiac Rate</th>
-          <th>Note</th>
+          <th><!-- Time -->时间</th>
+          <th><!-- Systolic Pressure -->收缩压</th>
+          <th><!-- Diastolic Pressure -->舒张压</th>
+          <th><!-- Cardiac Rate -->心率</th>
+          <th><!-- Note -->备注</th>
         </thead>
 
         {% for data in datas.items %}
@@ -81,8 +84,8 @@
       
       <nav>
         <ul class="pager">
-          <li>{% if datas.has_prev %}<a href="{{ url_for('index', page = datas.prev_num) }}"><< Newer</a>{% else %}<< Newer{% endif %}</li>
-          <li>{% if datas.has_next %}<a href="{{ url_for('index', page = datas.next_num) }}">Older >></a>{% else %}Older >>{% endif %}</li>
+          <li>{% if datas.has_prev %}<a href="{{ url_for('index', page = datas.prev_num) }}"><< <!--Newer-->前页</a>{% else %}<< <!--Newer-->前页{% endif %}</li>
+          <li>{% if datas.has_next %}<a href="{{ url_for('index', page = datas.next_num) }}"><!--Older-->后页 >></a>{% else %}<!--Older-->后页 >>{% endif %}</li>
         </ul>
       </nav>
     </div>

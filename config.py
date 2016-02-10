@@ -29,4 +29,4 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_POOL_RECYCLE = 10
 
 # pagination
-DATAS_PER_PAGE = 3
+DATAS_PER_PAGE = 15
