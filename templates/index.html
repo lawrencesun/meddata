@@ -65,16 +65,18 @@
           <th><!-- Time -->时间</th>
           <th><!-- Systolic Pressure -->收缩压</th>
           <th><!-- Diastolic Pressure -->舒张压</th>
+          <th><!-- Mean arterial Pressure -->平均动脉压</th>
           <th><!-- Cardiac Rate -->心率</th>
           <th><!-- Note -->备注</th>
         </thead>
 
         {% for data in datas.items %}
         <tbody>
-          <tr>
+          <tr class="alldata">
             <td>{{data.timestamp}}</td>
-            <td>{{data.systolic_pressure}}</td>
-            <td>{{data.diastolic_pressure}}</td>
+            <td id="sys">{{data.systolic_pressure}}</td>
+            <td id="dia">{{data.diastolic_pressure}}</td>
+            <td id="map"></td>
             <td>{{data.cardiac_rate}}</td>
             <td>{% if data.body%}{{data.body}}{% endif %}</td>
           </tr>
